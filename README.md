@@ -2,7 +2,7 @@
 
 This guide gives you a **complete, copy-paste-ready POC** to spin up Threagile + the classic vulnerable OWASP Juice Shop in <10 minutes. You'll model Juice Shop's architecture as a living YAML document, run automated threat analysis (risks, DFDs, data-asset diagrams, PDF report, Excel/JSON exports), and see how changes to the model instantly update everything — perfect for turning threat models into living Git-tracked docs in your team.
 
-**Why this POC proves value for your team**
+**Why this POC proves value**
 - **Zero install**: Everything runs in Docker (no Go, no Node deps).
 - **Living docs**: YAML lives in Git → CI can re-generate reports on every PR.
 - **Juice Shop integration**: You run the real vulnerable app side-by-side and model its real-world architecture (browser → Node.js/Express/Angular app → SQLite + other services).
@@ -163,7 +163,7 @@ docker run --rm -it -v "$(pwd)":/app/work threagile/threagile \
   --generate-technical-assets-json
 ```
 
-**Outputs created in your folder** (these are your living documents):
+**Outputs created in your folder** (these are the living documents):
 - `report.pdf` → Full risk report with diagrams, risk levels (low/medium/high/critical), mitigation advice.
 - `data-flow.png` + `data-asset.png` → Auto-generated DFDs.
 - `risks.xlsx` / `risks.json` → Trackable risks (import into Jira/Excel dashboards).
