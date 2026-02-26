@@ -33,7 +33,9 @@ After execution, Threagile generates several key artifacts found in this directo
 
 ### Visual Diagrams
 - **`data-flow-diagram.png`**: An automatically generated DFD showing trust boundaries and communication paths.
+  ![Data Flow Diagram](data-flow-diagram.png)
 - **`data-asset-diagram.png`**: Visualizes which assets process or store specific data types.
+  ![Data Asset Diagram](data-asset-diagram.png)
 
 ### Comprehensive Reports
 - **`report.pdf`**: A high-level executive summary and detailed technical breakdown of all identified risks.
