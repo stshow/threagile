@@ -1,0 +1,128 @@
+title: OWASP Juice Shop POC
+date: "2026-02-26"
+author:
+  name: "Threat Modeling Team"
+management_summary: "Agile threat model for OWASP Juice Shop architecture."
+business_criticality: important
+
+data_assets:
+  user-credentials:
+    id: user-credentials
+    description: "Customer usernames and passwords"
+    usage: business
+    origin: external
+    owner: customers
+    quantity: many
+    confidentiality: strictly-confidential
+    integrity: critical
+    availability: important
+
+trust_boundaries:
+  public-internet:
+    id: public-internet
+    description: "Public Internet"
+    type: network-cloud-provider
+  internal-network:
+    id: internal-network
+    description: "Juice Shop Hosting Environment"
+    type: network-cloud-provider
+
+technical_assets:
+  user-browser:
+    id: user-browser
+    description: "Customer Web Browser"
+    type: external-entity
+    usage: business
+    size: component
+    technology: browser
+    machine: virtual
+    encryption: none
+    owner: customers
+    confidentiality: public
+    integrity: operational
+    availability: operational
+    trust_boundaries:
+      - public-internet
+    communication_links:
+      browser-to-frontend:
+        target: angular-frontend
+        protocol: https
+        authentication: none
+        authorization: none
+        usage: business
+        data_assets_sent:
+          - user-credentials
+        data_assets_received:
+          - user-credentials
+
+  angular-frontend:
+    id: angular-frontend
+    description: "Angular Single Page Application"
+    type: process
+    usage: business
+    size: application
+    technology: web-server
+    machine: container
+    encryption: none
+    owner: development
+    confidentiality: public
+    integrity: important
+    availability: important
+    trust_boundaries:
+      - internal-network
+    communication_links:
+      frontend-to-api:
+        target: node-api
+        protocol: wss
+        authentication: none
+        authorization: none
+        usage: business
+        data_assets_sent:
+          - user-credentials
+        data_assets_received:
+          - user-credentials
+
+  node-api:
+    id: node-api
+    description: "Node.js Express Backend"
+    type: process
+    usage: business
+    size: application
+    technology: web-server
+    machine: container
+    encryption: none
+    owner: development
+    confidentiality: confidential
+    integrity: critical
+    availability: critical
+    trust_boundaries:
+      - internal-network
+    communication_links:
+      api-to-db:
+        target: sqlite-db
+        protocol: local-file-access
+        authentication: none
+        authorization: none
+        usage: business
+        data_assets_sent:
+          - user-credentials
+        data_assets_received:
+          - user-credentials
+
+  sqlite-db:
+    id: sqlite-db
+    description: "Local SQLite Database"
+    type: datastore
+    usage: business
+    size: component
+    technology: database
+    machine: container
+    encryption: none
+    owner: development
+    confidentiality: strictly-confidential
+    integrity: critical
+    availability: critical
+    trust_boundaries:
+      - internal-network
+    data_assets_stored:
+      - user-credentials
