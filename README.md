@@ -56,3 +56,19 @@ By analyzing the `risks.xlsx` or the `report.pdf`, you can identify common archi
 ## Summary
 
 Threagile transforms manual threat modeling into a repeatable, automated process that fits into a modern CI/CD pipeline. By maintaining the `juice-shop.yaml` file alongside the source code, security becomes a primary citizen of the development workflow.
+
+## Workflows to Investigate
+**Workflow 1: LLM as YAML Generator**
+IaC/Diagram/Prose → LLM Prompt → `threagile.yaml` → Human Review → `docker run threagile` → Risk Report
+
+**Workflow 2: Agentic YAML Generation**
+IaC/Diagram Ingest → Asset Extraction → Trust Boundary Detection → Data Flow Mapping → YAML Synthesis → `threagile` Run → Risk Report Parse → Finding Triage/Ticket Creation
+
+**Workflow 3: STRIDE-GPT Complementary Layer**
+Prose/Diagram → STRIDE-GPT (first-pass STRIDE) → Translate Findings → `threagile.yaml` → CI/CD Tracking
+
+**Workflow 4: LLM-Assisted Custom Risk Rules**
+Natural Language Policy → LLM → Go Rule Code → Threagile `.so` Plugin → Extended Ruleset
+
+**Workflow 5: CI/CD Integration**
+Code Commit → GitHub Action (Threagile) → JSON Risk Output → LLM Triage Script → Jira/Tickets
